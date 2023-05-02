@@ -27,7 +27,7 @@ workflows:
   demo-hello-workflow:
     jobs:
       - say-hello
-        post-steps:
-            - jira/notify
+        # post-steps:
+        #     - jira/notify
         
       
