@@ -38,7 +38,7 @@ workflows:
           post-steps:
             - jira/notify:
                 service_id: PROJ-11
-                environment_type: development
+                environment_type: deployment
                 job_type: deployment
                 issue_regexp: PROJ-11
   demo-hello-workflow:
