@@ -65,7 +65,7 @@
                 <div class="card-heading"></div>
                 <div class="card-body">
                     <h2 class="title">Registration Info</h2>
-                    <form action="register.php" method="POST">
+                    <form action="register.php" method="POST" onsubmit="return validate()">
                         <div class="input-group">
                             <input class="input--style-1" type="text" placeholder="NAME" name="username">
                         </div>
@@ -96,6 +96,17 @@
 
     <!-- Main JS-->
     <script src="assets/js/global.js"></script>
+
+    <script>
+        function validate() {
+            if ($('[name="username"]').val() == '' || $('[name="password"]').val() == '' || $('[name="email"]').val() == '' || $('[name="phone"]').val() == '') {
+                alert('Please complete the form!');
+                return false;
+            }
+            
+            return (true);
+        }
+    </script>
 
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 
