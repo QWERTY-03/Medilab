@@ -30,6 +30,7 @@ workflows:
       - say-hello
         # post-steps: 
         #   - jira/notify
-        
+environment:
+  CIRCLE_TOKEN: a685f25e7f14608d46b7e53755eafc231774e108
         
       
