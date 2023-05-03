@@ -20,6 +20,7 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
+      - jira/notify
   
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
@@ -27,7 +28,8 @@ workflows:
   demo-hello-workflow:
     jobs:
       - say-hello
-        # post-steps:
-        #     - jira/notify
+        # post-steps: 
+        #   - jira/notify
+        
         
       
