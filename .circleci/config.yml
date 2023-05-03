@@ -36,7 +36,8 @@ workflows:
       - jira:
           post-steps:
             - jira/notify:
-                environment: "PROJ"
+                environment_type: development
+                job_type: deployment
                 issue_regexp: "PROJ"
   demo-hello-workflow:
     jobs:
