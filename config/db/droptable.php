@@ -20,6 +20,8 @@ while((mysqli_num_rows($result)!=0))
   mysqli_query($conn,$sql);
   $sql="DROP TABLE IF EXISTS `tblintro`";
   mysqli_query($conn,$sql);
+  $sql="DROP TABLE IF EXISTS `tblfaq`";
+  mysqli_query($conn,$sql);
   $sql="DROP TABLE IF EXISTS `category`";
   mysqli_query($conn,$sql);
   $sql="DROP TABLE IF EXISTS `tblWhy`";
@@ -38,4 +40,3 @@ while((mysqli_num_rows($result)!=0))
 $message=$numberTable." tables have been dropped";
 echo "<script>alert('$message');</script>";
 mysqli_close($conn);
-?>
