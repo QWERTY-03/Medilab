@@ -7,11 +7,11 @@ orbs:
   php: circleci/php@1.1.0
 
 environment:
-  CIRCLE_TOKEN: a685f25e7f14608d46b7e53755eafc231774e108
+  CIRCLE_TOKEN: d8e811cbf0472f8816fcdffa92c87108da99cbbb
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  build:
+  jira:
     docker:
       - image: circleci/node:10
     steps:
@@ -32,9 +32,9 @@ jobs:
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  build:
+  jira:
     jobs:
-      - build:
+      - jira:
           post-steps:
             - jira/notify
   demo-hello-workflow:
