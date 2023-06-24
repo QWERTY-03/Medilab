@@ -25,8 +25,6 @@ if (!empty(isset($_POST['app-submit']))) {
     $department=setDepartment($_POST['department']);
     $doctor=setDoctor($_POST['doctor']);
     $message=$_POST['message'];
-
-    echo $doctor; exit;
     
     $appDBquery = "SELECT appID FROM appointment ORDER BY appID DESC LIMIT 1" ;
     mysqli_select_db($conn,"medilabdb"); 
