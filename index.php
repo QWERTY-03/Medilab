@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include("config/function.php"); 
+<?php 
+include('config/db.php');
+include("config/function.php"); 
 require_once("config/session.php");
+
+// exit(json_encode($_SESSION));
 
 if(!isset($_SESSION['Name'])){ //if login in session is not set
   header("Location: login.php");
@@ -9,6 +13,22 @@ if(!isset($_SESSION['Name'])){ //if login in session is not set
 else{
 
 }
+
+$sql ="select * from user where Email='".$_SESSION['Name']."'";  // sql command
+mysqli_select_db($conn,$dbname); //select database as default
+$result=mysqli_query($conn,$sql);  // command allow sql cmd to be sent to mysql
+
+$user = mysqli_fetch_assoc($result);
+$userID = $user['ID'];
+
+$sql2 ="select * from patient_info where userID='".$userID."'";  // sql command
+mysqli_select_db($conn,$dbname); //select database as default
+$result2=mysqli_query($conn,$sql2);  // command allow sql cmd to be sent to mysql
+$patientInfo = mysqli_fetch_assoc($result2);
+$infoStatus = $patientInfo['status'];
+// exit(json_encode($patientInfo));
+// exit($user['ID']);
+// echo json_encode($result); exit;
 ?>
 
 <head>
@@ -35,6 +55,9 @@ else{
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Vendor JS File -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -94,6 +117,14 @@ else{
 
 <body>
 
+  <script>
+    $(document).ready(function() {
+      var status = '<?php echo $infoStatus ?>';
+      if (status == 'incomplete')
+        alert('Please complete Patient Information form');
+    });
+  </script>
+
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex justify-content-between">
@@ -130,6 +161,7 @@ else{
         <input type="submit" name="submitSearch" value="Search" class="appointment-btn" style="border: none; "></input>
         </form>
         <a href="#appointment" class="appointment-btn scrollto" id="app" style="color:white; padding:5px; "><span class="d-none d-md-inline">Make an</span> &nbsp;Appointment</a>
+        <a href="patientInfo.php?userID=<?php echo $userID ?>" class="appointment-btn px-2" id="app" style="color:white; padding:5px; "><span class="d-none d-md-inline">Patient Information</a>
         <a href="logout.php"><img src="assets/img/logout.png" id="logout" width="30px" ></a>
       </nav><!-- .navbar -->
       

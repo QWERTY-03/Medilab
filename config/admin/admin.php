@@ -141,6 +141,9 @@ The above copyright notice and this permission notice shall be included in all c
                 <th><a href="user/viewuser.php">View Users </a></th>
               </tr>
               <tr>
+                <th><a href="patient/viewpatient.php">View Patients </a></th>
+              </tr>
+              <tr>
                 <th><a href="department/viewdepartment.php">View Department </a></th>
               </tr>
               <tr>
