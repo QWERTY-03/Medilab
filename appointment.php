@@ -109,6 +109,60 @@ if (!empty(isset($_POST['app-submit']))) {
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+
+  <script>
+
+    var currentDate = new Date().toJSON().slice(0, 10);
+    var min_time = "0900"; //9:00am
+    var max_time = "2100"; //9:00pm
+
+    function validateDate() {
+      var appointment_datetime = document.getElementById("date").value;
+
+      var appointment_date = appointment_datetime.slice(0, 10);
+
+      var currentDate = new Date().toJSON().slice(0, 10);
+
+      if(appointment_date <= currentDate)
+      {
+        alert("Appointment date must be after " + currentDate);
+        clearInputValue();
+      }
+      else
+      {
+        var appointment_time = appointment_datetime.slice(11, 19);
+
+        if(validateTime(appointment_time))
+        {
+          alert("Appointment time must be after 9:00am and before 9:00pm");
+          clearInputValue();
+        }
+
+      }
+
+      function validateTime(appointment_time) //validate time must be greater than 9:00am and less than 9:00pm
+      { 
+        if(appointment_time<min_time || appointment_time>max_time)
+        {
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+      }
+
+      function clearInputValue() 
+      {
+        document.getElementById("date").value = "";
+      }
+
+
+    }
+  </script>
+
+
 </head>
 <!-- ======= Appointment Section ======= -->
 <section id="appointment" class="appointment section-bg">
@@ -122,7 +176,7 @@ if (!empty(isset($_POST['app-submit']))) {
         <form  method="post" action="appointment.php">
           <div class="row">
             <div class="col-md-4 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
               <div class="validate"></div>
             </div>
             <div class="col-md-4 form-group mt-3 mt-md-0">
@@ -132,8 +186,9 @@ if (!empty(isset($_POST['app-submit']))) {
               <div class="validate"></div>
             </div>
             <div class="col-md-4 form-group mt-3 mt-md-0">
-              <input type="tel" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              <input type="text" class="form-control" name="phone" id="phone" placeholder="e.g. +60123456789" pattern="^(\+?6?01)[0-46-9]-*[0-9]{7,8}$" required>
               <div class="validate"></div>
+              <span class="validity"></span>
             </div>
           </div>
           <div class="row">
@@ -142,11 +197,11 @@ if (!empty(isset($_POST['app-submit']))) {
 
           ?>
             <div class="col-md-4 form-group mt-3">
-              <input type="datetime-local" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              <input type="datetime-local" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" onchange="validateDate()" required>
               <div class="validate"></div>
             </div>
             <div class="col-md-4 form-group mt-3">
-              <select name="department" id="department" class="form-select">
+              <select name="department" id="department" class="form-select" required>
               <option value="">Select Department</option>
               <?php 
                   $sql= "SELECT * FROM department ";
@@ -163,7 +218,7 @@ if (!empty(isset($_POST['app-submit']))) {
               <div class="validate"></div>
             </div>
             <div class="col-md-4 form-group mt-3">
-              <select name="doctor" id="doctor" class="form-select">
+              <select name="doctor" id="doctor" class="form-select" required>
                 <option value="">Select Doctor</option>
                 <option value="Doctor 1">Doctor 1</option>
                 <option value="Doctor 2">Doctor 2</option>
