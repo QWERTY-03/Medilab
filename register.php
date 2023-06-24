@@ -24,7 +24,7 @@
         }
         else{
             //sql command
-            $sql ="INSERT INTO `patient_info` (`userID`, `status`) VALUES ('".$UserID."', 'incomplete')"; 
+            $sql ="INSERT INTO `patient_info` (`userID`, `email`, `status`) VALUES ('".$UserID."', '".$UserEmail."', 'incomplete')"; 
             
             ///select medilabdb database 
             mysqli_select_db($conn,"medilabdb"); 
