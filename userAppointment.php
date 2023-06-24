@@ -162,6 +162,7 @@ require_once("config/session.php");
                 <th width="15%">Appointment Doctor</th>
                 <th width="15%">Department</th>
                 <th width="20%">Message</th>
+                <th width="10%">Print</th>
             </tr>
             <?php 
             $sql="select * from `appointment` WHERE `Email`='".$email."'";
@@ -185,6 +186,9 @@ require_once("config/session.php");
                 echo $row['name'];
                 ?></td>
                 <td><?php echo $rowcat['message']?></td>
+                <td>
+                  <a href="generate_pdf.php?appID=<?php echo $rowcat['appID']; ?>">Print</a>
+                </td>
             </tr>
             <?php 
             $data[$count]['appID'] = $rowcat['appID'];
