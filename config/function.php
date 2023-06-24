@@ -103,4 +103,38 @@ function getUserID(){
     return $identifier;
 }
 
+const DEPARTMENT_1 = 1;
+const DEPARTMENT_2 = 2;
+const DEPARTMENT_3 = 3;
+
+function setDepartment($department) {
+    switch ($department) {
+        case "Department 1":
+            return DEPARTMENT_1;
+        case "Department 2":
+            return DEPARTMENT_2;
+        case "Department 3":
+            return DEPARTMENT_3;
+        default:
+            return substr($department, -1);
+    }
+}
+
+const DOCTOR_1 = 1;
+const DOCTOR_2 = 2;
+const DOCTOR_3 = 3;
+
+function setDoctor($doctor) {
+    switch ($doctor) {
+        case "Doctor 1":
+            return DOCTOR_1;
+        case "Doctor 2":
+            return DOCTOR_2;
+        case "Doctor 3":
+            return DOCTOR_3;
+        default:
+            return null;
+    }
+}
+
 ?>

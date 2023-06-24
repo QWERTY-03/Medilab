@@ -13,26 +13,8 @@ if (!empty(isset($_POST['app-submit']))) {
     //$e=$_POST['email'];
     $phone=$_POST['phone'];
     $date=$_POST['date'];
-    $department=$_POST['department'];
-    
-    if($department=="Department 1"){
-        $department=1;
-    }else if($department=="Department 2"){
-      $department=2;
-    }else if($department=="Department 3"){
-      $department=3;
-    }else{
-      $department=substr($department,-1);
-    }
-    $doctor=$_POST['doctor'];
-    if($doctor=="Doctor 1"){
-      $doctor=1;
-    }else if($doctor=="Doctor 2"){
-      $doctor=2;
-    }else if($doctor=="Doctor 3"){
-      $doctor=3;
-    }
-    $message=$_POST['message'];
+    $department=setDepartment($_POST['department']);
+    $doctor=setDoctor($_POST['doctor']);
     //$appId = $conn->query("SELECT MAX(appID) FROM appointment"); // Replacing this line with $newId = and then manually typing in the current highest Id works (meaning everything else is all set).
     //$appId++;
     
@@ -112,42 +94,50 @@ if (!empty(isset($_POST['app-submit']))) {
 
 
   <script>
-    //alert("hello");
+
+    var currentDate = new Date().toJSON().slice(0, 10);
+    var min_time = "0900"; //9:00am
+    var max_time = "2100"; //9:00pm
+
     function validateDate() {
-      // alert("hello");
       var appointment_datetime = document.getElementById("date").value;
-      // alert(appointment_datetime);
 
       var appointment_date = appointment_datetime.slice(0, 10);
-      // alert(appointment_date);
 
       var currentDate = new Date().toJSON().slice(0, 10);
 
       if(appointment_date <= currentDate)
       {
         alert("Appointment date must be after " + currentDate);
-        //clear input value
-        document.getElementById("date").value = "";
+        clearInputValue();
       }
       else
       {
-        //validate time must be greater than 9:00am and less than 9:00pm
-        var min_time = "0900"; //9:00am
-        var max_time = "2100"; //9:00pm
         var appointment_time = appointment_datetime.slice(11, 19);
-        // alert(appointment_time);
 
-        if(appointment_time<min_time || appointment_time>max_time)
+        if(validateTime(appointment_time))
         {
           alert("Appointment time must be after 9:00am and before 9:00pm");
-          //clear input value
-          document.getElementById("date").value = "";
+          clearInputValue();
+        }
+
+      }
+
+      function validateTime(appointment_time) //validate time must be greater than 9:00am and less than 9:00pm
+      { 
+        if(appointment_time<min_time || appointment_time>max_time)
+        {
+          return true;
         }
         else
         {
-
+          return false;
         }
+      }
 
+      function clearInputValue() 
+      {
+        document.getElementById("date").value = "";
       }
 
 

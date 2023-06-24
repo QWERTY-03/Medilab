@@ -22,25 +22,11 @@ if (!empty(isset($_POST['app-submit']))) {
     $email=$_POST['email'];
     $phone=$_POST['phone'];
     $date=$_POST['date'];
-    $department=$_POST['department'];
-    if($department=="Department 1"){
-        $department=1;
-    }else if($department=="Department 2"){
-      $department=2;
-    }else if($department=="Department 3"){
-      $department=3;
-    }else{
-      $department=substr($department,-1);
-    }
-    $doctor=$_POST['doctor'];
-    if($doctor=="Doctor 1"){
-      $doctor=1;
-    }else if($doctor=="Doctor 2"){
-      $doctor=2;
-    }else if($doctor=="Doctor 3"){
-      $doctor=3;
-    }
+    $department=setDepartment($_POST['department']);
+    $doctor=setDoctor($_POST['doctor']);
     $message=$_POST['message'];
+
+    echo $doctor; exit;
     
     $appDBquery = "SELECT appID FROM appointment ORDER BY appID DESC LIMIT 1" ;
     mysqli_select_db($conn,"medilabdb"); 
