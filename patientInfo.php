@@ -9,7 +9,7 @@ if(!isset($_SESSION['Name'])){ //if login in session is not set
   header("Location: login.php");
 }
 
-$sql ="select * from patient_info where userID='".$_GET['userID']."'";  // sql command
+$sql ="select * from patient_info where email='".$_SESSION['Name']."'";  // sql command
 mysqli_select_db($conn,$dbname); //select database as default
 $result=mysqli_query($conn,$sql);  // command allow sql cmd to be sent to mysql
 $patientInfo = mysqli_fetch_assoc($result);
@@ -34,10 +34,10 @@ if (isset($_POST['submit_patient_info'])) {
     $sql ="UPDATE patient_info SET fname='".$fname."',lname='".$lname."',email='".$email."',telno='".$telno."',ic='".$ic."',
         address='".$address."',DOB='".$dob."',gender='".$gender."',nationality='".$nationality."',is_smoke='".$smoke."',
         is_alcohol='".$alcohol."',is_exercise='".$exercise."',allergy='".$allergy."',status='complete'
-        WHERE userID='".$userID."' ";  // sql command
+        WHERE email='".$_SESSION['Name']."' ";  // sql command
     mysqli_select_db($conn,$dbname); //select database as default
     mysqli_query($conn,$sql);  // command allow sql cmd to be sent to mysql
-    goto2("patientInfo.php?userID=".$_GET['userID'],"Successfully update patient information");
+    goto2("patientInfo.php?email=".$_SESSION['Name'],"Successfully update patient information");
 
     // echo $smoke; exit;
 }
@@ -201,7 +201,7 @@ if (isset($_POST['submit_patient_info'])) {
                             <div class="row mb-4">
                                 <div class="col-4">
                                     <label for="" class="form-label fw-bold">Email</label>
-                                    <input type="email" class="form-control" name="email" value="<?php echo ($patientInfo['email']!='' ? $patientInfo['email'] : '') ?>">
+                                    <input type="email" class="form-control" name="email" value="<?php echo ($patientInfo['email']!='' ? $patientInfo['email'] : '') ?>" readonly>
                                 </div>
                                 <div class="col-4">
                                     <label for="" class="form-label fw-bold">Telephone Number</label>

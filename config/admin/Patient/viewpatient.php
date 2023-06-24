@@ -137,7 +137,7 @@ The above copyright notice and this permission notice shall be included in all c
                 <td style="vertical-align:top;"><?php echo $rowcat['Name']?></td>
                 <td style="vertical-align:top;"><?php echo $rowcat['Email']?></td>
                 <td style="vertical-align:top;"><?php echo $rowcat['Phone']?></td>
-                <td style="vertical-align:top;" width="80"><a href="viewPatientInfo.php?ID=<?php echo $rowcat['ID'] ?>">View Info</a></td>
+                <td style="vertical-align:top;" width="80"><a href="viewPatientInfo.php?email=<?php echo $rowcat['Email'] ?>">View Info</a></td>
             </tr>
             <tr><td><br></td></tr>
             <?php } ?>

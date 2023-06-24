@@ -15,7 +15,7 @@ elseif (strcmp($_SESSION['Type'],"A")){//if user type not equal A then return fa
   goto2("../../../index.php","Only admin is allowed to enter the page.");}
 else{
 
-    $sql ="select * from patient_info where userID='".$_GET['ID']."'";  // sql command
+    $sql ="select * from patient_info where email='".$_GET['email']."'";  // sql command
     mysqli_select_db($conn,$dbname); //select database as default
     $result=mysqli_query($conn,$sql);  // command allow sql cmd to be sent to mysql
     $patientInfo = mysqli_fetch_assoc($result);
