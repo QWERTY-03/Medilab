@@ -23,7 +23,21 @@
             echo "Error: ".$conn->error;
         }
         else{
-            goto2("login.php", "User is successfully registered");
+            //sql command
+            $sql ="INSERT INTO `patient_info` (`userID`, `status`) VALUES ('".$UserID."', 'incomplete')"; 
+            
+            ///select medilabdb database 
+            mysqli_select_db($conn,"medilabdb"); 
+            
+            //command allow sql cmd to be sent to mysql
+            $result=mysqli_query($conn,$sql); 
+
+            if(!$result){
+                echo "Error: ".$conn->error;
+            }
+            else{
+                goto2("login.php", "User is successfully registered");
+            }
         }
 
     }
