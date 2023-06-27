@@ -338,7 +338,43 @@ $infoStatus = $patientInfo['status'];
           </div>
           <div class="col-lg-9 mt-4 mt-lg-0">
             <div class="tab-content">
-              <?php
+
+            <!-- ===== Refactored code for code smell 3 =====-->
+            <?php
+            // Establish the database connection
+            $dbname = "your_database_name";
+            $conn = mysqli_connect("localhost", "username", "password", $dbname);
+
+            // Check if the connection was successful
+            if (!$conn) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
+
+            // Retrieve the departments from the database
+            $sql = "SELECT * FROM department";
+            $result = mysqli_query($conn, $sql);
+
+            // Set the active tab based on the 'tab' parameter
+            $activeTab = isset($_GET['tab']) ? $_GET['tab'] : 1;
+
+            // Iterate through the departments and generate the tab content
+            while ($row = mysqli_fetch_assoc($result)) {
+                $departmentId = $row['id'];
+                $isActive = ($departmentId == $activeTab);
+                $tabId = "tab-" . $departmentId;
+                $activeClass = ($isActive) ? "active" : "";
+                ?>
+                <div class="tab-pane <?php echo $activeClass; ?>" id="<?php echo $tabId; ?>">
+                    <!-- Tab content here -->
+                </div>
+                <?php
+            }
+            // Close the database connection
+            mysqli_close($conn);
+            ?>
+
+<!-- ===== Code smell 3 =====-->              
+<!--               <?php
               $sql = "SELECT * FROM department";
               mysqli_select_db($conn, $dbname);
               $result = mysqli_query($conn, $sql);
@@ -358,7 +394,7 @@ $infoStatus = $patientInfo['status'];
                         <?php } else { ?>
                           <div class="tab-pane" id="tab-<?php echo $i; ?>">
                           <?php } ?>
-                        <?php } ?>
+                        <?php } ?> -->
 
 
 
