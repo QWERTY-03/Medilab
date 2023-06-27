@@ -373,7 +373,7 @@ $infoStatus = $patientInfo['status'];
             mysqli_close($conn);
             ?>
 
-<!-- ===== Code smell 3 =====-->              
+<!-- Code smell 3 -->              
 <!--               <?php
               $sql = "SELECT * FROM department";
               mysqli_select_db($conn, $dbname);
