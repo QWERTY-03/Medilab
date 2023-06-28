@@ -66,7 +66,7 @@ if (!empty(isset($_GET['email']))) {
                     <button type="button" class="btn btn-primary btn-wd btn-lg" onclick="document.location='register.php'">Click here to Sign Up Now!</button>
                   </div>
                   <p>or</p>
-                  <h4 class="card-title">Login</h4>
+                  <!-- <h4 class="card-title">Login</h4> -->
                   <div style="display:flex; align-items:center;justify-content:center">
                     <div data-text="signin_with" data-callback="handleToken" id="g_id_onload" data-client_id="1068824209617-1h1ni873e70h7dukj3kue8j6t8bf7oq9.apps.googleusercontent.com" data-auto_prompt="false">
                     </div>
@@ -98,7 +98,7 @@ if (!empty(isset($_GET['email']))) {
                                                                                                                   } ?>" required>
                   </div>
                 </div>
-                <div class="footer text-center">
+                <div class="footer text-center" style="bottom:-15px;">
                   <button type="button" class="btn btn-primary btn-link" onclick="document.location='forgetpw.php'">Forget Password</button>
                   <br>
                   <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Get Started</button>
