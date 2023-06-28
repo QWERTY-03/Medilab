@@ -339,57 +339,57 @@ $infoStatus = $patientInfo['status'];
           <div class="col-lg-9 mt-4 mt-lg-0">
             <div class="tab-content">
 
-            <!-- ===== Refactored code for code smell 3 =====-->
-            <?php
-            // Establish the database connection
-            $dbname = "your_database_name";
-            $conn = mysqli_connect("localhost", "username", "password", $dbname);
-
-            // Check if the connection was successful
-            if (!$conn) {
-                die("Connection failed: " . mysqli_connect_error());
-            }
-
-            // Retrieve the departments from the database
-            $sql = "SELECT * FROM department";
-            $result = mysqli_query($conn, $sql);
-
-            // Set the active tab based on the 'tab' parameter
-            $activeTab = isset($_GET['tab']) ? $_GET['tab'] : 1;
-
-            // Iterate through the departments and generate the tab content
-            while ($row = mysqli_fetch_assoc($result)) {
-                $departmentId = $row['id'];
+              <!-- ===== Refactored code for code smell 3 =====-->
+              <?php
+              // Retrieve the departments from the database
+              $sql = "SELECT * FROM department";
+              $result = mysqli_query($conn, $sql);
+              // Set the active tab based on the 'tab' parameter
+              $activeTab = isset($_GET['tab']) ? $_GET['tab'] : 1;
+              // Iterate through the departments and generate the tab content
+              while ($row = mysqli_fetch_assoc($result)) {
+                $departmentId = $row['ID'];
                 $isActive = ($departmentId == $activeTab);
                 $tabId = "tab-" . $departmentId;
                 $activeClass = ($isActive) ? "active" : "";
-                ?>
+              ?>
                 <div class="tab-pane <?php echo $activeClass; ?>" id="<?php echo $tabId; ?>">
-                    <!-- Tab content here -->
+                  <!-- Tab content here -->
+                  <div class="row">
+                    <div class="col-lg-8 details order-2 order-lg-1">
+                      <h3><?php echo $row['name'] ?></h3>
+                      <p class="fst-italic"><?php echo $row['MainDescription'] ?></p>
+                      <p><?php echo $row['SecondDescription'] ?></p>
+                    </div>
+                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                      <img src="" alt="" class="img-fluid">
+                    </div>
+                  </div>
                 </div>
-                <?php
-            }
-            // Close the database connection
-            mysqli_close($conn);
-            ?>
 
-<!-- Code smell 3 -->              
-<!--               <?php
-              $sql = "SELECT * FROM department";
-              mysqli_select_db($conn, $dbname);
-              $result = mysqli_query($conn, $sql);
-              $i = 0;
-              while ($rowcat = mysqli_fetch_assoc($result)) { ?>
+              <?php
+              }
+              // Close the database connection
+              mysqli_close($conn);
+              ?>
+
+              <!-- Code smell 3 -->
+              <!--               <?php
+                                  $sql = "SELECT * FROM department";
+                                  mysqli_select_db($conn, $dbname);
+                                  $result = mysqli_query($conn, $sql);
+                                  $i = 0;
+                                  while ($rowcat = mysqli_fetch_assoc($result)) { ?>
                 <?php $i++; ?>
                 <?php
-                if (isset($_GET['tab']) && $_GET['tab'] != 1) {
-                  if ($_GET['tab'] == $i) { ?>
+                                    if (isset($_GET['tab']) && $_GET['tab'] != 1) {
+                                      if ($_GET['tab'] == $i) { ?>
                     <div class="tab-pane active" id="tab-<?php echo $i; ?>">
                     <?php } else { ?>
                       <div class="tab-pane" id="tab-<?php echo $i; ?>">
                       <?php } ?>
                       <?php } else {
-                      if ($i == 1) { ?>
+                                      if ($i == 1) { ?>
                         <div class="tab-pane active" id="tab-<?php echo $i; ?>">
                         <?php } else { ?>
                           <div class="tab-pane" id="tab-<?php echo $i; ?>">
@@ -399,23 +399,14 @@ $infoStatus = $patientInfo['status'];
 
 
 
-                        <div class="row">
-                          <div class="col-lg-8 details order-2 order-lg-1">
-                            <h3><?php echo $rowcat['name'] ?></h3>
-                            <p class="fst-italic"><?php echo $rowcat['MainDescription'] ?></p>
-                            <p><?php echo $rowcat['SecondDescription'] ?></p>
-                          </div>
-                          <div class="col-lg-4 text-center order-1 order-lg-2">
-                            <img src="" alt="" class="img-fluid">
-                          </div>
-                        </div>
-                          </div>
-                        <?php } ?>
-                        </div>
-                      </div>
-                    </div>
 
             </div>
+          <?php } ?>
+          </div>
+        </div>
+      </div>
+
+      </div>
     </section><!-- End Departments Section -->
 
     <section id="contact" class="contact">
